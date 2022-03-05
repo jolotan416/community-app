@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tandem="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="communityMember"
+            type="com.tandem.communityapp.data.community.CommunityMember" />
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="16dp">
+
+        <com.google.android.material.imageview.ShapeableImageView
+            android:id="@+id/memberImageView"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintDimensionRatio="1:1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tandem:imageRadius="@{10}"
+            tandem:imageUrl="@{communityMember.pictureUrl}" />
+
+        <TextView
+            android:id="@+id/memberNameTextView"
+            style="@style/title_text_appearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="12dp"
+            android:ellipsize="end"
+            android:includeFontPadding="false"
+            android:lines="1"
+            android:text="@{communityMember.firstName}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toStartOf="@id/referenceCountBarrier"
+            app:layout_constraintStart_toEndOf="@id/memberImageView"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="Jonathan" />
+
+        <androidx.constraintlayout.widget.Barrier
+            android:id="@+id/referenceCountBarrier"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:orientation="vertical"
+            app:barrierDirection="start"
+            app:constraint_referenced_ids="memberReferenceCountTextView, newIndicator" />
+
+        <TextView
+            android:id="@+id/memberReferenceCountTextView"
+            style="@style/indicator_text_appearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@{communityMember.referenceCountString}"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/memberNameTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            tandem:willShow="@{!communityMember.isNew}"
+            tools:text="999" />
+
+        <TextView
+            android:id="@+id/newIndicator"
+            style="@style/indicator_text_appearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:letterSpacing="0.1"
+            android:paddingHorizontal="12dp"
+            android:paddingVertical="2dp"
+            android:text="@string/new_indicator"
+            android:textColor="@color/primaryWhite"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/memberNameTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tandem:backgroundColor="@{@color/highlightBlue}"
+            tandem:backgroundRadius="@{100}"
+            tandem:willShow="@{communityMember.isNew}" />
+
+        <TextView
+            android:id="@+id/memberDescriptionTextView"
+            style="@style/default_text_appearance"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="12dp"
+            android:ellipsize="end"
+            android:lines="2"
+            android:text="@{communityMember.topic}"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@id/memberNameTextView"
+            app:layout_constraintTop_toBottomOf="@id/memberNameTextView"
+            tools:text="I can help you learn English and Spanish." />
+
+        <TextView
+            android:id="@+id/nativeIndicator"
+            style="@style/indicator_text_appearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:includeFontPadding="false"
+            android:text="@string/native_indicator"
+            android:textSize="12sp"
+            app:layout_constraintStart_toStartOf="@id/memberDescriptionTextView"
+            app:layout_constraintTop_toBottomOf="@id/memberDescriptionTextView" />
+
+        <TextView
+            android:id="@+id/nativeLanguageTextView"
+            style="@style/indicator_text_appearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{communityMember.displayedNativeLanguage}"
+            android:textColor="@color/functionGreyIndicator"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/nativeIndicator"
+            app:layout_constraintStart_toEndOf="@id/nativeIndicator"
+            tools:text="en" />
+
+        <TextView
+            android:id="@+id/learnsIndicator"
+            style="@style/indicator_text_appearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:includeFontPadding="false"
+            android:text="@string/learns_indicator"
+            android:textSize="12sp"
+            app:layout_constraintBottom_toBottomOf="@id/nativeIndicator"
+            app:layout_constraintStart_toEndOf="@id/nativeLanguageTextView"
+            app:layout_constraintTop_toTopOf="@id/nativeIndicator" />
+
+        <TextView
+            android:id="@+id/learnedLanguageTextView"
+            style="@style/indicator_text_appearance"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="@{communityMember.displayedLearnedLanguage}"
+            android:textColor="@color/functionGreyIndicator"
+            android:textSize="11sp"
+            app:layout_constraintBottom_toBottomOf="@id/learnsIndicator"
+            app:layout_constraintStart_toEndOf="@id/learnsIndicator"
+            tools:text="ru" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

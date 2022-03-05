@@ -1,7 +1,6 @@
 package com.tandem.communityapp.data.community
 
 import androidx.room.*
-import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CommunityDao {

@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">Tandem Community</string>
+
+    <string name="community">Community</string>
+    <string name="new_indicator">New</string>
+    <string name="native_indicator">Native</string>
+    <string name="learns_indicator">Learns</string>
 </resources>

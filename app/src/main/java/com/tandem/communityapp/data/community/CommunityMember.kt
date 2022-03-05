@@ -37,4 +37,16 @@ data class CommunityMember(
 
     @ColumnInfo(name = "isLiked")
     var isLiked: Boolean = false
-)
+) {
+    val referenceCountString: String
+        get() = referenceCount.toString()
+
+    val isNew: Boolean
+        get() = referenceCount == 0
+
+    val displayedNativeLanguage: String
+        get() = nativeLanguages.first()
+
+    val displayedLearnedLanguage: String
+        get() = learnedLanguages.first()
+}

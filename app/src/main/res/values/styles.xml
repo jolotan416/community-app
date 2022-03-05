@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="default_text_appearance">
+        <item name="android:textColor">?attr/colorOnPrimary</item>
+    </style>
+
+    <style name="title_text_appearance" parent="default_text_appearance">
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="indicator_text_appearance" parent="default_text_appearance">
+        <item name="android:textStyle">bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+</resources>
