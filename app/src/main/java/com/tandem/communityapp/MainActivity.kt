@@ -6,6 +6,7 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
+import androidx.recyclerview.widget.RecyclerView
 import com.tandem.communityapp.community.adapters.CommunityMembersAdapter
 import com.tandem.communityapp.community.viewmodels.CommunityMembersViewState
 import com.tandem.communityapp.community.viewmodels.CommunityViewModel
@@ -50,7 +51,16 @@ class MainActivity : AppCompatActivity(), CommunityMembersAdapter.Callback {
                 setDrawable(colorDrawable)
             }
         binding.communityMembersRecyclerView.apply {
-            adapter = communityMembersAdapter
+            adapter = communityMembersAdapter.apply {
+                registerAdapterDataObserver(object : RecyclerView.AdapterDataObserver() {
+                    override fun onItemRangeInserted(positionStart: Int, itemCount: Int) {
+                        super.onItemRangeInserted(positionStart, itemCount)
+
+                        if (positionStart != 0) return
+                        binding.communityMembersRecyclerView.scrollToPosition(0)
+                    }
+                })
+            }
             addItemDecoration(dividerDecoration)
             setHasFixedSize(true)
         }

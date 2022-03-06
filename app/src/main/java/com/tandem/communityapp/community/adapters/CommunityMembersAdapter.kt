@@ -26,7 +26,10 @@ class CommunityMembersAdapter(private val callback: Callback) :
             override fun areItemsTheSame(
                 oldItem: CommunityMembersAdapterViewType,
                 newItem: CommunityMembersAdapterViewType
-            ) = oldItem.viewType == newItem.viewType
+            ) = if (oldItem is CommunityMembersAdapterViewType.ItemViewType) {
+                oldItem.communityMember.id ==
+                        (newItem as? CommunityMembersAdapterViewType.ItemViewType)?.communityMember?.id
+            } else oldItem.viewType == newItem.viewType
 
             override fun areContentsTheSame(
                 oldItem: CommunityMembersAdapterViewType,
