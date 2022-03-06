@@ -129,13 +129,14 @@ class CommunityMembersAdapter(private val callback: Callback) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.retryButton.setOnClickListener {
-                callback.loadPage()
+                callback.onClickReloadButton()
             }
         }
     }
 
     interface Callback {
-        fun onClickCommunityMemberLike(communityMember: CommunityMember)
         fun loadPage()
+        fun onClickCommunityMemberLike(communityMember: CommunityMember)
+        fun onClickReloadButton()
     }
 }

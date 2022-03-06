@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.tandem.communityapp.community.repositories.CommunityRepository
 import com.tandem.communityapp.data.community.CommunityMember
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.launch
@@ -51,6 +52,15 @@ class CommunityViewModel @Inject constructor(
     fun onClickCommunityMemberLike(communityMember: CommunityMember) {
         viewModelScope.launch(Dispatchers.IO) {
             repository.toggleCommunityMemberLike(communityMember)
+        }
+    }
+
+    fun onClickReloadButton() {
+        CoroutineScope(Dispatchers.Main).launch {
+            repository.communityMembers.collect {
+                mutableCommunityMembersViewState.value =
+                    CommunityMembersViewState.LOADING(it.communityMembers)
+            }
         }
     }
 }

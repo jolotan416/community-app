@@ -3,7 +3,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:padding="16dp">
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="20dp">
 
     <TextView
         style="@style/default_text_appearance"
@@ -11,7 +12,7 @@
         android:layout_height="wrap_content"
         android:gravity="center"
         android:text="@string/error_message_title"
-        android:textSize="12sp" />
+        android:textSize="14sp" />
 
     <TextView
         android:id="@+id/retryButton"

@@ -38,6 +38,10 @@ class MainActivity : AppCompatActivity(), CommunityMembersAdapter.Callback {
         communityViewModel.onClickCommunityMemberLike(communityMember)
     }
 
+    override fun onClickReloadButton() {
+        communityViewModel.onClickReloadButton()
+    }
+
     private fun configureRecyclerView() {
         val colorDrawable =
             ColorDrawable(ContextCompat.getColor(this, R.color.functionGreyIndicator))
