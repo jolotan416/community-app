@@ -30,7 +30,8 @@ object BindingAdapters {
     @BindingAdapter("imageRadius")
     @JvmStatic
     fun setImageRadius(imageView: ShapeableImageView, imageRadius: Int) {
-        imageView.shapeAppearanceModel = generateShapeAppearanceModel(imageRadius)
+        imageView.shapeAppearanceModel =
+            generateShapeAppearanceModel(imageRadius.dpToPx(imageView.resources.displayMetrics))
     }
 
     @BindingAdapter("backgroundColor", "backgroundRadius", requireAll = false)
@@ -38,15 +39,17 @@ object BindingAdapters {
     fun setBackground(view: View, @ColorInt backgroundColor: Int = 0, backgroundRadius: Int = 0) {
         if (backgroundColor == 0) return
 
+        val shapeAppearanceModel =
+            generateShapeAppearanceModel(backgroundRadius.dpToPx(view.resources.displayMetrics))
         val background =
-            MaterialShapeDrawable(generateShapeAppearanceModel(backgroundRadius)).apply {
+            MaterialShapeDrawable(shapeAppearanceModel).apply {
                 fillColor = ColorStateList.valueOf(backgroundColor)
             }
         view.background = background
     }
 
-    private fun generateShapeAppearanceModel(radius: Int): ShapeAppearanceModel =
+    private fun generateShapeAppearanceModel(radius: Float): ShapeAppearanceModel =
         ShapeAppearanceModel.Builder()
-            .setAllCornerSizes(radius.toFloat())
+            .setAllCornerSizes(radius)
             .build()
 }

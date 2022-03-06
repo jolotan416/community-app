@@ -19,15 +19,7 @@ class CommunityViewModel @Inject constructor(
     private val repository: CommunityRepository
 ) : ViewModel() {
     init {
-        viewModelScope.launch(Dispatchers.IO) {
-            repository.communityMembers.collect {
-                withContext(Dispatchers.Main) {
-                    mutableCommunityMembersViewState.value =
-                        if (it.isLastPage) CommunityMembersViewState.SUCCESS(it.communityMembers)
-                        else CommunityMembersViewState.LOADING(it.communityMembers)
-                }
-            }
-        }
+        observeRepository()
     }
 
     private val mutableCommunityMembersViewState: MutableLiveData<CommunityMembersViewState> by lazy {
@@ -62,6 +54,18 @@ class CommunityViewModel @Inject constructor(
 
                 mutableCommunityMembersViewState.value =
                     CommunityMembersViewState.LOADING(it.communityMembers)
+            }
+        }
+    }
+
+    private fun observeRepository() {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.communityMembers.collect {
+                withContext(Dispatchers.Main) {
+                    mutableCommunityMembersViewState.value =
+                        if (it.isLastPage) CommunityMembersViewState.SUCCESS(it.communityMembers)
+                        else CommunityMembersViewState.LOADING(it.communityMembers)
+                }
             }
         }
     }

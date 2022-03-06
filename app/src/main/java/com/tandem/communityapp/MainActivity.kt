@@ -45,11 +45,8 @@ class MainActivity : AppCompatActivity(), CommunityMembersAdapter.Callback {
     private fun configureRecyclerView() {
         val dividerDecoration =
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL).apply {
-                ContextCompat.getDrawable(
-                    this@MainActivity, R.drawable.function_grey_divider
-                )?.let {
-                    setDrawable(it)
-                }
+                ContextCompat.getDrawable(this@MainActivity, R.drawable.function_grey_divider)
+                    ?.let { setDrawable(it) }
             }
         binding.communityMembersRecyclerView.apply {
             adapter = communityMembersAdapter.apply {
@@ -58,6 +55,7 @@ class MainActivity : AppCompatActivity(), CommunityMembersAdapter.Callback {
                         super.onItemRangeInserted(positionStart, itemCount)
 
                         if (positionStart != 0) return
+
                         binding.communityMembersRecyclerView.scrollToPosition(0)
                     }
                 })

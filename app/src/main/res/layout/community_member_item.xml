@@ -83,7 +83,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tandem:backgroundColor="@{@color/highlightBlue}"
-            tandem:backgroundRadius="@{100}"
+            tandem:backgroundRadius="@{20}"
             tandem:willShow="@{communityMember.isNew}" />
 
         <TextView

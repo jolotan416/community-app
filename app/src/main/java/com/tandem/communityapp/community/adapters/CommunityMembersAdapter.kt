@@ -1,7 +1,6 @@
 package com.tandem.communityapp.community.adapters
 
 import android.content.res.ColorStateList
-import android.util.TypedValue
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import android.widget.ProgressBar
@@ -14,11 +13,12 @@ import com.tandem.communityapp.R
 import com.tandem.communityapp.data.community.CommunityMember
 import com.tandem.communityapp.databinding.CommunityMemberItemBinding
 import com.tandem.communityapp.databinding.RetryViewBinding
+import com.tandem.communityapp.utilities.dpToPx
 
 class CommunityMembersAdapter(private val callback: Callback) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
-        private const val ITEM_PADDING_DP = 16f
+        private const val ITEM_PADDING_DP = 16
     }
 
     private val asyncListDiffer: AsyncListDiffer<CommunityMembersAdapterViewType> =
@@ -48,6 +48,7 @@ class CommunityMembersAdapter(private val callback: Callback) :
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
         val context = parent.context
         val inflater = LayoutInflater.from(context)
+
         return when (viewType) {
             CommunityMembersAdapterViewType.LoadingViewType.viewType -> {
                 val progressBar = ProgressBar(context).apply {
@@ -55,13 +56,7 @@ class CommunityMembersAdapter(private val callback: Callback) :
                         RecyclerView.LayoutParams.MATCH_PARENT,
                         RecyclerView.LayoutParams.WRAP_CONTENT
                     )
-                    setPadding(
-                        TypedValue.applyDimension(
-                            TypedValue.COMPLEX_UNIT_DIP,
-                            ITEM_PADDING_DP,
-                            parent.resources.displayMetrics
-                        ).toInt()
-                    )
+                    setPadding(ITEM_PADDING_DP.dpToPx(resources.displayMetrics).toInt())
                 }
                 LoadingViewHolder(progressBar)
             }
@@ -87,13 +82,11 @@ class CommunityMembersAdapter(private val callback: Callback) :
     }
 
     fun setItems(communityMembers: List<CommunityMember>, willShowPageLoader: Boolean) {
-        val addedCommunityMembers: MutableList<CommunityMembersAdapterViewType> =
-            communityMembers.map { CommunityMembersAdapterViewType.ItemViewType(it) }
-                .toMutableList()
-        if (willShowPageLoader) {
-            addedCommunityMembers.add(CommunityMembersAdapterViewType.LoadingViewType)
-        }
-        asyncListDiffer.submitList(addedCommunityMembers)
+        asyncListDiffer.submitList(
+            communityMembers.map { CommunityMembersAdapterViewType.ItemViewType(it) } +
+                    if (willShowPageLoader) listOf(CommunityMembersAdapterViewType.LoadingViewType)
+                    else listOf()
+        )
     }
 
     fun addRetryView() {

@@ -4,9 +4,6 @@ import androidx.room.*
 
 @Dao
 interface CommunityDao {
-    @Query("SELECT * FROM communityMember")
-    fun getCommunityMembers(): List<CommunityMember>
-
     @Query("SELECT * FROM communityMember WHERE id in (:memberIds)")
     fun getCommunityMembers(memberIds: List<String>): List<CommunityMember>
 

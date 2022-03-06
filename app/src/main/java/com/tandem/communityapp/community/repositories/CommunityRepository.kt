@@ -33,11 +33,10 @@ class CommunityRepository @Inject constructor(
         }
         localDataSource.insertCommunityMembers(remoteCommunityMembers)
 
-        val currentCommunityMembers = mutableCommunityMembers.value.communityMembers
+        val newCommunityMembers =
+            mutableCommunityMembers.value.communityMembers + remoteCommunityMembers
         val isLastPage = remoteCommunityMembers.size < MEMBERS_PER_PAGE
-        mutableCommunityMembers.value = PagedCommunityMembers(
-            currentCommunityMembers + remoteCommunityMembers, isLastPage
-        )
+        mutableCommunityMembers.value = PagedCommunityMembers(newCommunityMembers, isLastPage)
         ++currentPage
     }
 
