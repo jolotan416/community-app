@@ -2,6 +2,7 @@ package com.tandem.communityapp.data
 
 import android.content.Context
 import androidx.room.Room
+import com.tandem.communityapp.BuildConfig
 import com.tandem.communityapp.data.community.CommunityApiService
 import com.tandem.communityapp.data.database.CommunityAppDatabase
 import dagger.Module
@@ -9,6 +10,8 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
@@ -19,12 +22,22 @@ object DataSourceModule {
     private const val DATABASE_NAME = "community-app-database"
 
     @Provides
-    fun provideCommunityApiService(): CommunityApiService =
-        Retrofit.Builder()
+    fun provideCommunityApiService(): CommunityApiService {
+        val okHttpClientBuilder = OkHttpClient.Builder()
+        if (BuildConfig.DEBUG) {
+            okHttpClientBuilder.addInterceptor(
+                HttpLoggingInterceptor()
+                    .setLevel(HttpLoggingInterceptor.Level.BODY)
+            )
+        }
+
+        return Retrofit.Builder()
             .baseUrl(BASE_URL)
+            .client(okHttpClientBuilder.build())
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(CommunityApiService::class.java)
+    }
 
     @Provides
     fun provideCommunityAppDatabase(@ApplicationContext context: Context): CommunityAppDatabase =

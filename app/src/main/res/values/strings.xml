@@ -5,4 +5,7 @@
     <string name="new_indicator">New</string>
     <string name="native_indicator">Native</string>
     <string name="learns_indicator">Learns</string>
+
+    <string name="error_message_title">Sorry, we encountered an error loading this page.</string>
+    <string name="erorr_message_cta">Reload</string>
 </resources>

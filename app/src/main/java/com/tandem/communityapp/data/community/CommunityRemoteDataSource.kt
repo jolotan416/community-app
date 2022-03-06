@@ -5,6 +5,6 @@ import javax.inject.Inject
 class CommunityRemoteDataSource @Inject constructor(
     private val communityApiService: CommunityApiService
 ) {
-    suspend fun getCommunityMembers(page: Int = 1): List<CommunityMember> =
+    suspend fun getCommunityMembers(page: Int): List<CommunityMember> =
         communityApiService.getCommunityMembers(page).response
 }

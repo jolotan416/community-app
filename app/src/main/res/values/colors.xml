@@ -4,5 +4,6 @@
     <color name="primaryWhite">#F7FFF0</color>
     <color name="functionGreyPlaceholder">#E0E0E0</color>
     <color name="functionGreyIndicator">#B5B1AE</color>
+    <color name="functionRed">#F44336</color>
     <color name="highlightBlue">#74CDC7</color>
 </resources>

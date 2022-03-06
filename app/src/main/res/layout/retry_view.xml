@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp">
+
+    <TextView
+        style="@style/default_text_appearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/error_message_title"
+        android:textSize="12sp" />
+
+    <TextView
+        android:id="@+id/retryButton"
+        style="@style/indicator_text_appearance"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="8dp"
+        android:text="@string/erorr_message_cta"
+        android:textColor="@color/functionRed"
+        android:textSize="14sp" />
+
+</LinearLayout>

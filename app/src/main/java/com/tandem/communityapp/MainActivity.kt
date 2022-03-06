@@ -6,15 +6,17 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.DividerItemDecoration
-import com.tandem.communityapp.community.CommunityMembersAdapter
-import com.tandem.communityapp.community.CommunityViewModel
+import com.tandem.communityapp.community.adapters.CommunityMembersAdapter
+import com.tandem.communityapp.community.viewmodels.CommunityMembersViewState
+import com.tandem.communityapp.community.viewmodels.CommunityViewModel
 import com.tandem.communityapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
     private val communityViewModel: CommunityViewModel by viewModels()
-    private val communityMembersAdapter = CommunityMembersAdapter()
+    private val communityMembersAdapter =
+        CommunityMembersAdapter { communityViewModel.loadCommunityMembers() }
 
     private lateinit var binding: ActivityMainBinding
 
@@ -43,8 +45,16 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
-        communityViewModel.displayedCommunityMembers.observe(this) { communityMembers ->
-            communityMembersAdapter.setItems(communityMembers)
+        communityViewModel.communityMembersViewState.observe(this) { communityMembersViewState ->
+            when (communityMembersViewState) {
+                is CommunityMembersViewState.LOADING -> communityMembersAdapter.setItems(
+                    communityMembersViewState.communityMembers, true
+                )
+                is CommunityMembersViewState.SUCCESS -> communityMembersAdapter.setItems(
+                    communityMembersViewState.communityMembers, false
+                )
+                is CommunityMembersViewState.ERROR -> communityMembersAdapter.addRetryView()
+            }
         }
     }
 }
