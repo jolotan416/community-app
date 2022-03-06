@@ -5,6 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.tandem.communityapp.community.repositories.CommunityRepository
+import com.tandem.communityapp.data.community.CommunityMember
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collect
@@ -44,6 +45,12 @@ class CommunityViewModel @Inject constructor(
                     mutableCommunityMembersViewState.value = CommunityMembersViewState.ERROR
                 }
             }
+        }
+    }
+
+    fun onClickCommunityMemberLike(communityMember: CommunityMember) {
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.toggleCommunityMemberLike(communityMember)
         }
     }
 }

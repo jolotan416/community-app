@@ -15,7 +15,7 @@ import com.tandem.communityapp.data.community.CommunityMember
 import com.tandem.communityapp.databinding.CommunityMemberItemBinding
 import com.tandem.communityapp.databinding.RetryViewBinding
 
-class CommunityMembersAdapter(private val loadingCallback: LoadingCallback) :
+class CommunityMembersAdapter(private val callback: Callback) :
     RecyclerView.Adapter<RecyclerView.ViewHolder>() {
     companion object {
         private const val ITEM_PADDING_DP = 16f
@@ -100,10 +100,15 @@ class CommunityMembersAdapter(private val loadingCallback: LoadingCallback) :
         )
     }
 
-    class ViewHolder(private val binding: CommunityMemberItemBinding) :
+    inner class ViewHolder(private val binding: CommunityMemberItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         fun bindData(communityMember: CommunityMember) {
-            binding.communityMember = communityMember
+            binding.apply {
+                this.communityMember = communityMember
+                likeButton.setOnClickListener {
+                    callback.onClickCommunityMemberLike(communityMember)
+                }
+            }
         }
     }
 
@@ -116,7 +121,7 @@ class CommunityMembersAdapter(private val loadingCallback: LoadingCallback) :
                     ContextCompat.getColor(context, R.color.highlightBlue)
                 )
             }
-            loadingCallback.loadPage()
+            callback.loadPage()
         }
     }
 
@@ -124,12 +129,13 @@ class CommunityMembersAdapter(private val loadingCallback: LoadingCallback) :
         RecyclerView.ViewHolder(binding.root) {
         fun bind() {
             binding.retryButton.setOnClickListener {
-                loadingCallback.loadPage()
+                callback.loadPage()
             }
         }
     }
 
-    fun interface LoadingCallback {
+    interface Callback {
+        fun onClickCommunityMemberLike(communityMember: CommunityMember)
         fun loadPage()
     }
 }

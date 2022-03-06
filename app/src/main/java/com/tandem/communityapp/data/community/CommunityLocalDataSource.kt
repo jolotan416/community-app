@@ -13,4 +13,9 @@ class CommunityLocalDataSource @Inject constructor(
         communityAppDatabase.getCommunityDao()
             .insertCommunityMembers(communityMembers)
     }
+
+    fun updateCommunityMember(communityMember: CommunityMember) {
+        communityAppDatabase.getCommunityDao()
+            .updateCommunityMember(communityMember)
+    }
 }

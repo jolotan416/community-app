@@ -8,4 +8,8 @@
 
     <string name="error_message_title">Sorry, we encountered an error loading this page.</string>
     <string name="erorr_message_cta">Reload</string>
+
+    <!-- Content Descriptions -->
+    <string name="profile_picture_content_description">Profile Picture</string>
+    <string name="like_button_content_description">Like Button</string>
 </resources>
