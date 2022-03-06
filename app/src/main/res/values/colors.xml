@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="primaryBlack">#4A4947</color>
-    <color name="primaryWhite">#F7FFF0</color>
+    <color name="primaryWhite">#F7F3F0</color>
     <color name="functionGreyPlaceholder">#E0E0E0</color>
     <color name="functionGreyIndicator">#B5B1AE</color>
     <color name="functionRed">#F44336</color>

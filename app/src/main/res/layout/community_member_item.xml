@@ -26,6 +26,7 @@
             app:layout_constraintDimensionRatio="1:1"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintWidth_max="120dp"
             tandem:imageRadius="@{10}"
             tandem:imageUrl="@{communityMember.pictureUrl}" />
 
@@ -58,10 +59,12 @@
             style="@style/indicator_text_appearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:includeFontPadding="false"
             android:text="@{communityMember.referenceCountString}"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/memberNameTextView"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="@id/memberNameTextView"
             tandem:willShow="@{!communityMember.isNew}"
             tools:text="999" />
 
@@ -90,6 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
             android:ellipsize="end"
+            android:lineSpacingExtra="4dp"
             android:lines="2"
             android:text="@{communityMember.topic}"
             android:textSize="16sp"
@@ -103,10 +107,13 @@
             style="@style/indicator_text_appearance"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="20dp"
+            android:layout_marginTop="28dp"
             android:includeFontPadding="false"
             android:text="@string/native_indicator"
             android:textSize="12sp"
+            app:layout_constraintEnd_toStartOf="@id/nativeLanguageTextView"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintHorizontal_chainStyle="packed"
             app:layout_constraintStart_toStartOf="@id/memberDescriptionTextView"
             app:layout_constraintTop_toBottomOf="@id/memberDescriptionTextView" />
 
@@ -120,6 +127,7 @@
             android:textColor="@color/functionGreyIndicator"
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@id/nativeIndicator"
+            app:layout_constraintEnd_toStartOf="@id/learnsIndicator"
             app:layout_constraintStart_toEndOf="@id/nativeIndicator"
             tools:text="en" />
 
@@ -133,6 +141,7 @@
             android:text="@string/learns_indicator"
             android:textSize="12sp"
             app:layout_constraintBottom_toBottomOf="@id/nativeIndicator"
+            app:layout_constraintEnd_toStartOf="@id/learnedLanguageTextView"
             app:layout_constraintStart_toEndOf="@id/nativeLanguageTextView"
             app:layout_constraintTop_toTopOf="@id/nativeIndicator" />
 
@@ -146,16 +155,17 @@
             android:textColor="@color/functionGreyIndicator"
             android:textSize="11sp"
             app:layout_constraintBottom_toBottomOf="@id/learnsIndicator"
+            app:layout_constraintEnd_toStartOf="@id/likeButton"
             app:layout_constraintStart_toEndOf="@id/learnsIndicator"
             tools:text="ru" />
 
         <ImageView
             android:id="@+id/likeButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
             android:contentDescription="@string/like_button_content_description"
-            android:paddingStart="4dp"
-            android:paddingTop="4dp"
+            android:paddingStart="8dp"
+            android:paddingTop="8dp"
             android:paddingEnd="0dp"
             app:imageDrawable="@{communityMember.isLiked ? @drawable/ic_like_active : @drawable/ic_like_inactive}"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,6 +1,5 @@
 package com.tandem.communityapp
 
-import android.graphics.drawable.ColorDrawable
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -44,11 +43,13 @@ class MainActivity : AppCompatActivity(), CommunityMembersAdapter.Callback {
     }
 
     private fun configureRecyclerView() {
-        val colorDrawable =
-            ColorDrawable(ContextCompat.getColor(this, R.color.functionGreyIndicator))
         val dividerDecoration =
             DividerItemDecoration(this, DividerItemDecoration.VERTICAL).apply {
-                setDrawable(colorDrawable)
+                ContextCompat.getDrawable(
+                    this@MainActivity, R.drawable.function_grey_divider
+                )?.let {
+                    setDrawable(it)
+                }
             }
         binding.communityMembersRecyclerView.apply {
             adapter = communityMembersAdapter.apply {
