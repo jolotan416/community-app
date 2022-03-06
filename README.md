@@ -55,6 +55,8 @@ Contains all information about various data sources
 
 Contains general dependencies used by various modules of the app
 
+`APK stored in apks/community-app-debug.apk`
+
 ## Icons Used
 
 1. Inactive Like Icon - https://www.flaticon.com/free-icon/like_126473
