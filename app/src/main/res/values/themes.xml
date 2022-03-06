@@ -1,10 +1,12 @@
 <resources xmlns:tools="http://schemas.android.com/tools">
-    <!-- Base application theme. -->
+
     <style name="Theme.CommunityApp" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <item name="android:windowBackground">@color/primaryWhite</item>
         <item name="colorPrimary">@color/primaryWhite</item>
         <item name="colorOnPrimary">@color/primaryBlack</item>
         <item name="colorSecondary">@color/highlightBlue</item>
         <item name="colorOnSecondary">@color/primaryWhite</item>
         <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimary</item>
     </style>
+
 </resources>
