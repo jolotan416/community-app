@@ -58,6 +58,8 @@ class CommunityViewModel @Inject constructor(
     fun onClickReloadButton() {
         CoroutineScope(Dispatchers.Main).launch {
             repository.communityMembers.collect {
+                if (it.isLastPage) return@collect
+
                 mutableCommunityMembersViewState.value =
                     CommunityMembersViewState.LOADING(it.communityMembers)
             }
